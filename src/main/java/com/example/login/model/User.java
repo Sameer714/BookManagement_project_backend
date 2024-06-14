@@ -37,16 +37,16 @@ public class User implements UserDetails {
 
 	@Column(name = "role")
 	private String role;
-	
+
 	@Column(name = "status")
 	private String status;
-	
+
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(String status) {
-		this.status = status;	
+		this.status = status;
 	}
 
 	public long getId() {
@@ -68,9 +68,9 @@ public class User implements UserDetails {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public void setPass(String pass) {
-			this.pass = pass;
+		this.pass = pass;
 	}
 
 	public String getEmail() {
@@ -88,7 +88,7 @@ public class User implements UserDetails {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public User(long id, String name, String userName, String pass, String email, String role) {
 		super();
 		this.id = id;
@@ -96,7 +96,7 @@ public class User implements UserDetails {
 		this.userName = userName;
 		this.pass = pass;
 		this.email = email;
-		this.role =  role;
+		this.role = role;
 	}
 
 	public User() {
@@ -116,8 +116,8 @@ public class User implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() {			
-			return pass;
+	public String getPassword() {
+		return pass;
 	}
 
 	@Override
@@ -137,20 +137,18 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		if(pass.isEmpty()|| userName.isEmpty()) {
+		if (pass.isEmpty() || userName.isEmpty()) {
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
-		if(pass.isEmpty()|| userName.isEmpty()) {
+		if (pass.isEmpty() || userName.isEmpty()) {
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}

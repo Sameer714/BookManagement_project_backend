@@ -30,7 +30,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST,"/v1/api/createuser").permitAll()
 				.requestMatchers("/auth/login").permitAll()
-//				.requestMatchers("/v1/api/changePass").permitAll()
+//				.requestMatchers("/mail/sendmail").permitAll()
 				.anyRequest().authenticated()).exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
