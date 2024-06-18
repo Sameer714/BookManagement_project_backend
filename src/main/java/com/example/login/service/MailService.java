@@ -11,23 +11,23 @@ import com.example.login.model.Otp;
 @Service
 public class MailService {
 
-    private final JavaMailSender mailSender;
-    
-    @Value("${spring.mail.username}")
-    private String fromMail;
+	private final JavaMailSender mailSender;
 
-    @Autowired
-    public MailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+	@Value("${spring.mail.username}")
+	private String fromMail;
 
-    public void sendMail(String mail, Otp otp) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(fromMail);
-        simpleMailMessage.setSubject("OTP for password reset");
-        simpleMailMessage.setText("UserName " + otp.getUserName() + " Your otp for Password Reset is " + otp.getOtp());
-        simpleMailMessage.setTo(otp.getEmail());
+	@Autowired
+	public MailService(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
 
-        mailSender.send(simpleMailMessage);
-    }
+	public void sendMail(String mail, Otp otp) {
+		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+		simpleMailMessage.setFrom(fromMail);
+		simpleMailMessage.setSubject("OTP for password reset");
+		simpleMailMessage.setText("UserName " + otp.getUserName() + "\nYour otp for Password Reset is " + otp.getOtp());
+		simpleMailMessage.setTo(otp.getEmail());
+
+		mailSender.send(simpleMailMessage);
+	}
 }

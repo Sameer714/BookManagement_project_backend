@@ -13,17 +13,17 @@ import com.example.login.service.OtpService;
 @RestController
 @RequestMapping("v1/api/otp")
 public class OtpController {
-    
-    private final OtpService otpService;
-    
-    @Autowired
-    public OtpController(OtpService otpService) {
-        this.otpService = otpService;
-    }
 
-    @PostMapping("/send")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public String sendOtp(@RequestBody SpringMail email) {
-        return otpService.sendOtp(email.getEmail());
-    }
+	private final OtpService otpService;
+
+	@Autowired
+	public OtpController(OtpService otpService) {
+		this.otpService = otpService;
+	}
+
+	@PostMapping("/send")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+	public String sendOtp(@RequestBody SpringMail email) {
+		return otpService.sendOtp(email.getEmail());
+	}
 }

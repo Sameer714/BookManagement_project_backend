@@ -10,36 +10,43 @@ public class Otp {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	private String userName;
 	private int otp;
 	private String email;
-	
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public int getOtp() {
 		return otp;
 	}
+
 	public void setOtp(int otp) {
 		this.otp = otp;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public Otp(long id, String userName, int otp, String email) {
 		super();
 		this.id = id;
@@ -47,17 +54,14 @@ public class Otp {
 		this.otp = otp;
 		this.email = email;
 	}
-	
+
 	public Otp() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Otp [id=" + id + ", userName=" + userName + ", otp=" + otp + ", email=" + email + "]";
 	}
-	
-	
-	
 
 }

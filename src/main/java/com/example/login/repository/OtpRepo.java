@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.login.model.Otp;
 
 @Repository
-public interface OtpRepo extends JpaRepository<Otp, Long>{
-	
+public interface OtpRepo extends JpaRepository<Otp, Long> {
 	Otp findByEmailAndUserName(String email, String userName);
 }
