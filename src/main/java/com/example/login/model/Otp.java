@@ -1,11 +1,19 @@
 package com.example.login.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Otp {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private long userId;
+	
+	private String userName;
 	private int otp;
 	private String email;
-	
 	
 	public long getId() {
 		return id;
@@ -13,11 +21,11 @@ public class Otp {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getOtp() {
 		return otp;
@@ -32,10 +40,10 @@ public class Otp {
 		this.email = email;
 	}
 	
-	public Otp(long id, long userId, int otp, String email) {
+	public Otp(long id, String userName, int otp, String email) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.userName = userName;
 		this.otp = otp;
 		this.email = email;
 	}
@@ -46,7 +54,7 @@ public class Otp {
 	
 	@Override
 	public String toString() {
-		return "Otp [id=" + id + ", userId=" + userId + ", otp=" + otp + ", email=" + email + "]";
+		return "Otp [id=" + id + ", userName=" + userName + ", otp=" + otp + ", email=" + email + "]";
 	}
 	
 	

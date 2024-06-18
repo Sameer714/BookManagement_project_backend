@@ -6,22 +6,28 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.example.login.model.SpringMail;
+import com.example.login.model.Otp;
 
 @Service
 public class MailService {
 
-	@Value ("$(spring.mail.username)")
-	private String fromMail;
-	@Autowired
-	private JavaMailSender mailSender;
-	public void sendMail (String mail , SpringMail mails) {
-		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-		simpleMailMessage.setFrom("techvum1437@gmail.com");
-		simpleMailMessage.setSubject(mails.getSubject());
-		simpleMailMessage.setText(mails.getBody());
-		simpleMailMessage.setTo(mail);
-		
-		mailSender.send(simpleMailMessage);
-	}
+    private final JavaMailSender mailSender;
+    
+    @Value("${spring.mail.username}")
+    private String fromMail;
+
+    @Autowired
+    public MailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public void sendMail(String mail, Otp otp) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(fromMail);
+        simpleMailMessage.setSubject("OTP for password reset");
+        simpleMailMessage.setText("UserName " + otp.getUserName() + " Your otp for Password Reset is " + otp.getOtp());
+        simpleMailMessage.setTo(otp.getEmail());
+
+        mailSender.send(simpleMailMessage);
+    }
 }
