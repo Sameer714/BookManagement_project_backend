@@ -14,6 +14,15 @@ public class Otp {
 	private String userName;
 	private int otp;
 	private String email;
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public long getId() {
 		return id;
@@ -63,5 +72,4 @@ public class Otp {
 	public String toString() {
 		return "Otp [id=" + id + ", userName=" + userName + ", otp=" + otp + ", email=" + email + "]";
 	}
-
 }

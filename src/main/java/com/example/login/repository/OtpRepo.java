@@ -8,4 +8,6 @@ import com.example.login.model.Otp;
 @Repository
 public interface OtpRepo extends JpaRepository<Otp, Long> {
 	Otp findByEmailAndUserName(String email, String userName);
+
+	Otp findByEmail(String email);
 }
