@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.login.model.CheckOtp;
+import com.example.login.model.GlobalInput;
 import com.example.login.model.SpringMail;
 import com.example.login.service.OtpService;
 
@@ -18,12 +19,9 @@ import com.example.login.service.OtpService;
 @RequestMapping("v1/api/otp")
 public class OtpController {
 
-	private final OtpService otpService;
-
 	@Autowired
-	public OtpController(OtpService otpService) {
-		this.otpService = otpService;
-	}
+	private OtpService otpService;
+
 
 	@PostMapping("/send")
 	public ResponseEntity<Object> sendOtp(@RequestBody SpringMail email) {
@@ -31,7 +29,7 @@ public class OtpController {
 	}
 	
 	@PostMapping("/check/Otp")
-	public ResponseEntity<Object> checkAndValidateOtp(@RequestBody CheckOtp checkOtp){
-		return otpService.checkAndValidateOtp(checkOtp);
-	}
+	public ResponseEntity<Object> checkAndValidateOtp(@RequestBody GlobalInput.CheckOtp checkOtp) {
+	    return otpService.checkAndValidateOtp(checkOtp);
+	}	
 }

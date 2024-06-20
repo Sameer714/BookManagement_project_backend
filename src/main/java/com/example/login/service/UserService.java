@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.example.login.controller.PasswordChecker;
 import com.example.login.duplicate.DuplicateUsernameException;
 import com.example.login.model.User;
+import com.example.login.model.UserPass;
 import com.example.login.repository.UserRepo;
 
 @Service
@@ -71,28 +72,28 @@ public class UserService implements UserDetailsService {
 		User u = userRepo.findById(id);
 		u.setName(user.getName());
 		User isUserPresent = userRepo.findByEmail(user.getEmail());
-		if (isUserPresent == null) {
+		if (isUserPresent != null) {
 			User isusrnmPresent = userRepo.findByUserName(user.getUsername());
 			if (isusrnmPresent == null) {
 				u.setUserName(user.getUsername());
 			} else {
-				throw new DuplicateUsernameException("Username Already Exists", "Duplicate :");
+				u.setUserName(u.getUsername());
 			}
 			u.setEmail(user.getEmail());
 			u.setRole("ROLE_" + user.getRole());
-			if (user.getPassword().isEmpty()) {
-				throw new DuplicateUsernameException("Enter Password!", "Invalid : ");
-			} else {
+			if (!user.getPassword().isEmpty()) {
 				PasswordChecker passwordChecker = new PasswordChecker();
 				if (passwordChecker.isValid(user.getPassword())) {
 					u.setPass(user.getPassword());
 					return userRepo.save(u);
 				} else {
-					throw new DuplicateUsernameException("Password doesn't follow our criteria!", "Invalid : ");
+					u.setPass(u.getPassword());
+					return userRepo.save(u);
+
 				}
 			}
 		}
-		throw new DuplicateUsernameException("Email id Already Registered!", "Duplicate :");
+		throw new DuplicateUsernameException("Email Not Registered!", "Not Found:");
 	}
 
 	public User loadUserByUsername(String userName) {

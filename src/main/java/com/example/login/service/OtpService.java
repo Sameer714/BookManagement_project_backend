@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.login.controller.PasswordChecker;
 import com.example.login.model.CheckOtp;
+import com.example.login.model.GlobalInput;
 import com.example.login.model.Otp;
 import com.example.login.model.User;
 import com.example.login.repository.OtpRepo;
@@ -61,22 +63,34 @@ public class OtpService {
 		return String.valueOf(otp);
 	}
 
-	public ResponseEntity<Object> checkAndValidateOtp(CheckOtp checkOtp) {
-		if(checkOtp != null && checkOtp.getEmail() != null) {
+	public ResponseEntity<Object> checkAndValidateOtp(GlobalInput.CheckOtp checkOtp) {
+		if (checkOtp != null && checkOtp.getEmail() != null) {
 			Otp entry = otpRepo.findByEmail(checkOtp.getEmail());
-			if(checkOtp.getOtp() != null && entry.getStatus().equals("ACTIVE")) {
-				if(Integer.parseInt(checkOtp.getOtp()) == (entry.getOtp())) {
-					entry.setStatus("INACTIVE");
-					otpRepo.save(entry);
-					return ResponseEntity.status(HttpStatus.OK)
-							.body("{\"message\": \"" + "OTP verified Successfully" + "\" ,  \"Success\": \"" + "true" + "\"}");
-				}else {
+			if (checkOtp.getOtp() != null && entry.getStatus().equals("ACTIVE")) {
+				if (Integer.parseInt(checkOtp.getOtp()) == (entry.getOtp())) {
+					User existingUser = userRepo.findByEmail(checkOtp.getEmail());
+					PasswordChecker checker = new PasswordChecker();
+					boolean flag = checker.isValid(checkOtp.getNewPass());
+					if (flag) {
+						entry.setStatus("INACTIVE");
+						otpRepo.save(entry);
+						existingUser.setPass(checkOtp.getNewPass());
+						userRepo.save(existingUser);
+						return ResponseEntity.status(HttpStatus.OK)
+								.body("{\"message\": \"" + "OTP verified and Password Updated!"
+										+ "\" ,  \"Success\": \"" + "true" + "\"}");
+					} else {
+						return ResponseEntity.status(HttpStatus.OK)
+								.body("{\"message\": \"" + "OTP verified Successfully but Password Is not Strong "
+										+ "\" ,  \"Success\": \"" + "true" + "\"}");
+					}
+				} else {
 					return ResponseEntity.status(HttpStatus.OK)
 							.body("{\"message\": \"" + "OTP not verified" + "\" ,  \"Success\": \"" + "false" + "\"}");
 				}
 			}
-			return ResponseEntity.status(HttpStatus.OK)
-					.body("{\"message\": \"" + "Check you otp and try again" + "\" ,  \"Success\": \"" + "false" + "\"}");
+			return ResponseEntity.status(HttpStatus.OK).body(
+					"{\"message\": \"" + "Check you otp and try again" + "\" ,  \"Success\": \"" + "false" + "\"}");
 		}
 		return ResponseEntity.status(HttpStatus.OK)
 				.body("{\"message\": \"" + "Payload is missing" + "\" ,  \"Success\": \"" + "false" + "\"}");

@@ -19,6 +19,7 @@ import com.example.login.duplicate.DuplicateUsernameException;
 import com.example.login.model.Messg;
 import com.example.login.model.Pass;
 import com.example.login.model.User;
+import com.example.login.model.UserPass;
 import com.example.login.service.UserService;
 
 @RestController
@@ -78,11 +79,11 @@ public class UserController {
 		try {
 			User saveUser = userService.updateUser(user, id);
 			if (saveUser != null) {
-				if (saveUser.getRole() == "ROLE_ADMIN") {
+				if (saveUser.getRole().equals("ROLE_ADMIN")) {
 					return ResponseEntity.status(HttpStatus.OK)
 							.body("{\"message\": \"" + "User Created Successfully , Wait for Admin Approval!"
 									+ "\" ,  \"Success\": \"" + "true" + "\"}");
-				} else if (saveUser.getRole() == "ROLE_USER") {
+				} else if (saveUser.getRole().equals("ROLE_USER")) {
 					return ResponseEntity.status(HttpStatus.OK).body(
 							"{\"message\": \"" + "User Saved Successfully" + "\" ,  \"Success\": \"" + "true" + "\"}");
 				}
@@ -93,7 +94,7 @@ public class UserController {
 		}
 		return null;
 	}
-
+	
 	@PostMapping("/changePass")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public ResponseEntity<String> changepass(@RequestBody Pass pass) {
