@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -23,6 +25,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepo userRepo;
+	
+//	@Autowired
+//	PasswordEncoder passwordEncoder;
 
 	public User getUserinfo(long id) {
 		User a = userRepo.findById(id);
@@ -59,6 +64,7 @@ public class UserService implements UserDetailsService {
 				PasswordChecker passwordChecker = new PasswordChecker();
 				if (passwordChecker.isValid(user.getPassword())) {
 					u.setPass(user.getPassword());
+//					u.setPass(passwordEncoder.encode(user.getPassword()));
 					return userRepo.save(u);
 				} else {
 					throw new DuplicateUsernameException("Password doesn't follow our criteria!", "Invalid : ");

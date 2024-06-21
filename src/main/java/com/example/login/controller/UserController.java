@@ -19,7 +19,6 @@ import com.example.login.duplicate.DuplicateUsernameException;
 import com.example.login.model.Messg;
 import com.example.login.model.Pass;
 import com.example.login.model.User;
-import com.example.login.model.UserPass;
 import com.example.login.service.UserService;
 
 @RestController

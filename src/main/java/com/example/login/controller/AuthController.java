@@ -3,6 +3,8 @@ package com.example.login.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,14 +40,19 @@ public class AuthController {
 
 	@Autowired
 	private UserRepo userRepo;
-
+	
+//	@Autowired
+//	PasswordEncoder passwordEncoder;
+	
 	@PostMapping("/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
 		JwtResponse response = new JwtResponse();
 
 		User user = userRepo.findByEmail(request.getGmail());
 		if (user != null && user.getStatus().equalsIgnoreCase("ACTIVE")) {
+//			if (passwordEncoder.matches(request.getPassw(), user.getPassword())) {
 			if (user.getPassword().equals(request.getPassw())) {
+
 				JwtHelper jwtHelper = new JwtHelper();
 				token = jwtHelper.generateToken(user);
 
