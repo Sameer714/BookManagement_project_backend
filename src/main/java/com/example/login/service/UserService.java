@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.example.login.controller.PasswordChecker;
 import com.example.login.duplicate.DuplicateUsernameException;
 import com.example.login.model.User;
-import com.example.login.model.UserPass;
 import com.example.login.repository.UserRepo;
 
 @Service

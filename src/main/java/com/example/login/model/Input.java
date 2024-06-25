@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Input {
 
+	
     public String bookName;
     public String authorName;
     public Date launchDate;

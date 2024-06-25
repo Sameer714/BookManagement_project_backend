@@ -1,6 +1,7 @@
 package com.example.login.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.login.duplicate.DuplicateUsernameException;
-import com.example.login.model.Messg;
 import com.example.login.model.Pass;
 import com.example.login.model.User;
 import com.example.login.service.UserService;
@@ -24,10 +24,7 @@ import com.example.login.service.UserService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/v1/api")
-
 public class UserController {
-
-	Messg mssg;
 
 	@Autowired
 	UserService userService;
