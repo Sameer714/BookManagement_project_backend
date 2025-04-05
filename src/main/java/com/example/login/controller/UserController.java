@@ -22,7 +22,7 @@ import com.example.login.model.User;
 import com.example.login.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200") 
 @RequestMapping("/v1/api")
 public class UserController {
 
@@ -61,7 +61,8 @@ public class UserController {
 							"{\"message\": \"" + "User Saved Successfully" + "\" ,  \"Success\": \"" + "true" + "\"}");
 				}
 			}
-		} catch (DuplicateUsernameException e) {
+		} 
+		catch (DuplicateUsernameException e) {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body("{\"message\": \"" + e.getMessage() + "\" , \"Success\": \"" + "false" + "\"}");
 		}

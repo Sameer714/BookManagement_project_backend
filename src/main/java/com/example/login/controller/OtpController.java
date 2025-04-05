@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.login.model.CheckOtp;
 import com.example.login.model.GlobalInput;
 import com.example.login.model.SpringMail;
 import com.example.login.service.OtpService;

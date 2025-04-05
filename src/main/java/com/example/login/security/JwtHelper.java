@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.login.model.User;
 
 import io.jsonwebtoken.Claims;
@@ -13,6 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtHelper {
 	
+	@Autowired
 	public User user;
 
 	public static final long JWT_TOKEN_VALIDITY = 5*60*60;

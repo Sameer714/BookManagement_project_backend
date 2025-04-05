@@ -47,9 +47,4 @@ public class JwtResponse {
 	public String toString() {
 		return "JwtResponse [Jwtoken=" + Jwtoken + ", usernm=" + usernm + ", role=" + role + ", id=" + id + "]";
 	}
-	
-	
-	
-	
-
 }

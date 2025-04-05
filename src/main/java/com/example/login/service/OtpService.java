@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.login.controller.PasswordChecker;
-import com.example.login.model.CheckOtp;
 import com.example.login.model.GlobalInput;
 import com.example.login.model.Otp;
 import com.example.login.model.User;
