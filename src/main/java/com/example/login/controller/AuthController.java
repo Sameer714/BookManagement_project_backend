@@ -70,8 +70,6 @@ public class AuthController {
 		} else {
 			response.setUsernm("USER INACTIVE!");
 			return new ResponseEntity<>(response, HttpStatus.OK);
-
 		}
-
 	}
 }
